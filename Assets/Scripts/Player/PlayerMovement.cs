@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-
             rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
 
             if (!isInDeadZone)
@@ -40,10 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (rb != null)
                 {
-                    
-
                     float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
-                    Debug.Log(dotProduct);
                     if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
                         rb.AddForce(transform.up * forwardVelocity);
                     rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
@@ -77,6 +73,10 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "BoostZone")
         {
             boostZoneMultiplier = 3f;
+        }
+        if (col.gameObject.tag == "Die")
+        {
+            isAlive = false;
         }
     }
 
