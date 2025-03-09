@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] bool isAlive;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float turnSpeed;
+    [SerializeField] private float maxVelocity;
     [Space]
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
@@ -11,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] Transform transform;
 
+    [SerializeField] bool isInDeadZone;
+    [SerializeField] float deadZoneTimer;
 
     void Start()
     {
@@ -20,16 +24,38 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
-
-        float forwardVelocity = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        float angularVelocity = Input.GetAxis("Horizontal") * turnSpeed;
-
-        if (rb != null)
+        if (isAlive)
         {
-            rb.AddForce(transform.up * forwardVelocity);
-            //rb.AddTorque(-angularVelocity * 100);
-            rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
+            if (!isInDeadZone)
+            {
+                float forwardVelocity = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+                float angularVelocity = Input.GetAxis("Horizontal") * turnSpeed;
+
+                if (rb != null)
+                {
+                    rb.AddForce(transform.up * forwardVelocity);
+                    //rb.AddTorque(-angularVelocity * 100);
+                    rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
+                    rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity);
+                }
+            }
+            else
+            {
+                deadZoneTimer += Time.deltaTime;
+            }
+
+            if (deadZoneTimer >= 5)
+            {
+                isAlive = false;
+            }
         }
+        else
+        {
+            Debug.Log("dead");
+        }
+        
     }
+
+
+    
 }
