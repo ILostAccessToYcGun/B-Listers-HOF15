@@ -29,13 +29,27 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
+            //rb.linearVelocity =Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
+            //rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
+            if (rb.linearVelocity.magnitude >= maxVelocity * boostZoneMultiplier)
+            {
+                rb.linearVelocity = rb.linearVelocity.normalized * maxVelocity * boostZoneMultiplier;
+            }
 
             if (!isInDeadZone)
             {
                 //Acceleration, decceleration ,holding s should stop, not backwards
                 float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime * boostZoneMultiplier;
                 float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
+
+                if (Input.GetAxisRaw("Vertical") <= 0)
+                {
+                    //decelleration
+                }
+                if (Input.GetAxisRaw("Horizontal") == 0)
+                {
+                    //decelleration
+                }
 
                 if (rb != null)
                 {
