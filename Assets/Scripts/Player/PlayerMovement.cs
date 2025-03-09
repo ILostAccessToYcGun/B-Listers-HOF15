@@ -56,6 +56,20 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "DeadZone")
+        {
+            isInDeadZone = true;
+        }
+    }
 
-    
+    public void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "DeadZone")
+        {
+            isInDeadZone = false;
+        }
+    }
+
 }
