@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
@@ -10,6 +10,11 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData pointerEventData)
     {
         transform.GetChild(1).gameObject.SetActive(false);
     }
