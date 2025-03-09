@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     rb.AddForce(transform.up * forwardVelocity);
                     rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
-                    maxVelocity = 6f;
+                    maxVelocity = 4f;
                 }
             }
             else
@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "DeadZone")
         {
             isInDeadZone = false;
+            deadZoneTimer = 0f;
         }
     }
 
