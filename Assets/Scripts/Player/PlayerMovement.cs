@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Acceleration, decceleration ,holding s should stop, not backwards
                 float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime * boostZoneMultiplier;
-                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed * boostZoneMultiplier;
+                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
 
                 if (rb != null)
                 {
