@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
+
+            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity);
+
             if (!isInDeadZone)
             {
                 float forwardVelocity = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -34,14 +37,14 @@ public class PlayerMovement : MonoBehaviour
                 if (rb != null)
                 {
                     rb.AddForce(transform.up * forwardVelocity);
-                    //rb.AddTorque(-angularVelocity * 100);
                     rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
-                    rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity);
+                    maxVelocity = 6f;
                 }
             }
             else
             {
                 deadZoneTimer += Time.deltaTime;
+                maxVelocity = 0.8f;
             }
 
             if (deadZoneTimer >= 5)
