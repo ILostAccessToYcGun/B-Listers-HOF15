@@ -29,17 +29,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            //rb.linearVelocity =Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
-            //rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
-            if (rb.linearVelocity.magnitude >= maxVelocity * boostZoneMultiplier)
-            {
-                rb.linearVelocity = rb.linearVelocity.normalized * maxVelocity * boostZoneMultiplier;
-            }
+            rb.linearVelocity =Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
 
             if (!isInDeadZone)
             {
                 //Acceleration, decceleration ,holding s should stop, not backwards
-                float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime * boostZoneMultiplier;
+                float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.fixedDeltaTime * boostZoneMultiplier;
                 float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
 
                 if (Input.GetAxisRaw("Vertical") <= 0)
@@ -55,7 +50,9 @@ public class PlayerMovement : MonoBehaviour
                 {
                     float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
                     if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
+                    {
                         rb.AddForce(transform.up * forwardVelocity);
+                    }
                     rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
                     maxVelocity = 4f;
                 }
