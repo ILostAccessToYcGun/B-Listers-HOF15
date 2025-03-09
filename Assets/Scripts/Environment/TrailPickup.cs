@@ -3,7 +3,7 @@ using UnityEngine;
 public class TrailPickup : MonoBehaviour
 {
     [SerializeField] bool isPickedUp = false;
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerMovement player;
     [SerializeField] float magnetSpeed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -16,7 +16,7 @@ public class TrailPickup : MonoBehaviour
 
     private void Awake()
     {
-        player = FindAnyObjectByType<PlayerMovement>().gameObject;
+        player = FindAnyObjectByType<PlayerMovement>();
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -40,6 +40,7 @@ public class TrailPickup : MonoBehaviour
 
             if (ConsumeCheck())
             {
+                player.Boost();
                 Destroy(this.gameObject);
             }
         }

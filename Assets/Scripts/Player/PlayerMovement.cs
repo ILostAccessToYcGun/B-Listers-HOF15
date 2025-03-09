@@ -16,8 +16,27 @@ public class PlayerMovement : MonoBehaviour
     [Space]
     [Header("Zones")]
     [SerializeField] bool isInDeadZone;
+    [SerializeField] bool isInGravityZone;
     [SerializeField] float deadZoneTimer;
     [SerializeField] float boostZoneMultiplier;
+
+    [Space]
+    [Header("Boost")]
+    [SerializeField] float boostMaxVelocity;
+    [SerializeField] float boostSpeed;
+
+
+    public void Boost()
+    {
+        //increase max velocity
+        boostMaxVelocity += 2f;
+        boostSpeed += 1f;
+    }
+
+    public void SetGravityZoneBoolOn()
+    {
+        isInGravityZone = false;
+    }
 
     void Start()
     {
@@ -29,22 +48,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            rb.linearVelocity =Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
+            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, (maxVelocity + boostMaxVelocity) * boostZoneMultiplier);
 
             if (!isInDeadZone)
             {
                 //Acceleration, decceleration ,holding s should stop, not backwards
-                float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.fixedDeltaTime * boostZoneMultiplier;
+                float forwardVelocity = Input.GetAxisRaw("Vertical") * (moveSpeed + boostSpeed) * Time.fixedDeltaTime * boostZoneMultiplier;
                 float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
 
-                if (Input.GetAxisRaw("Vertical") <= 0)
-                {
-                    //decelleration
-                }
-                if (Input.GetAxisRaw("Horizontal") == 0)
-                {
-                    //decelleration
-                }
+                if (!isInGravityZone)
+                    rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime / 10), Mathf.Lerp(rb.linearVelocity.y, 0, Time.fixedDeltaTime / 10));
 
                 if (rb != null)
                 {
@@ -72,7 +85,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("dead");
         }
-        
+
+        if (boostMaxVelocity > 0)
+            boostMaxVelocity = Mathf.Clamp(boostMaxVelocity - Time.fixedDeltaTime / 5, 0, 100);
+        if (boostSpeed > 0)
+            boostSpeed = Mathf.Clamp(boostSpeed - Time.fixedDeltaTime / 5, 0, 100);
+
+
     }
 
     public void OnTriggerEnter2D(Collider2D col)
@@ -80,6 +99,10 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "DeadZone")
         {
             isInDeadZone = true;
+        }
+        if (col.gameObject.tag == "GravityZone")
+        {
+            isInGravityZone = true;
         }
         if (col.gameObject.tag == "BoostZone")
         {
@@ -97,6 +120,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isInDeadZone = false;
             deadZoneTimer = 0f;
+        }
+        if (col.gameObject.tag == "GravityZone")
+        {
+            Invoke("SetGravityZoneBool", 3f);
         }
         if (col.gameObject.tag == "BoostZone")
         {
