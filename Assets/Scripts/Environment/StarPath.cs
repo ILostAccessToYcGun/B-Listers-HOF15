@@ -14,6 +14,7 @@ public class StarPath : MonoBehaviour
     [SerializeField] private float moveSpeed = 0.5f;
 
     private bool coroutineAllowed = true;
+    [SerializeField] StarTrail starTrail;
 
     void Start()
     {
@@ -39,6 +40,8 @@ public class StarPath : MonoBehaviour
 
         while(tParam < 1f)
         {
+            
+
             tParam += Time.deltaTime * moveSpeed;
 
             currentPos = Mathf.Pow(1 - tParam, 3) * p0 
@@ -57,6 +60,10 @@ public class StarPath : MonoBehaviour
         if (routeToGo < routes.Length - 1)
         {
             coroutineAllowed = true;
+        }
+        else
+        {
+            starTrail.isSpawningStars = false;
         }
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Star
   - BoostZone
   - Die
+  - GravityZone
   layers:
   - Default
   - TransparentFX
