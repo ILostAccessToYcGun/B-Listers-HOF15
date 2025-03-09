@@ -1058,9 +1058,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlive: 1
-  moveSpeed: 100
-  turnSpeed: 80
-  maxVelocity: 4
+  moveSpeed: 80
+  turnSpeed: 120
+  maxVelocity: 6
   acceleration: 0
   deceleration: 300
   transform: {fileID: 1778937670}
@@ -1240,4 +1240,3 @@ SceneRoots:
   - {fileID: 1162803198}
   - {fileID: 1881297284}
   - {fileID: 1413080810}
-  - {fileID: 1492959965}
