@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 80
-  turnSpeed: 30
+  turnSpeed: 60
   acceleration: 0
   deceleration: 0
   transform: {fileID: 1778937670}

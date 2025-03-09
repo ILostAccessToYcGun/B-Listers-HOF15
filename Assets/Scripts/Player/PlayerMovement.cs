@@ -23,12 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
 
         float forwardVelocity = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        float angularVelocity = Input.GetAxis("Horizontal") * (turnSpeed * Mathf.Deg2Rad) * Time.deltaTime;
+        float angularVelocity = Input.GetAxis("Horizontal") * turnSpeed;
 
         if (rb != null)
         {
             rb.AddForce(transform.up * forwardVelocity);
-            rb.AddTorque(-angularVelocity * 100);
+            //rb.AddTorque(-angularVelocity * 100);
+            rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
         }
     }
 }
