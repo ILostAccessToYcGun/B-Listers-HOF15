@@ -13,8 +13,11 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] Transform transform;
 
+    [Space]
+    [Header("Zones")]
     [SerializeField] bool isInDeadZone;
     [SerializeField] float deadZoneTimer;
+    [SerializeField] float boostZoneMultiplier;
 
     void Start()
     {
@@ -27,13 +30,13 @@ public class PlayerMovement : MonoBehaviour
         if (isAlive)
         {
 
-            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity);
+            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity * boostZoneMultiplier);
 
             if (!isInDeadZone)
             {
                 //Acceleration, decceleration ,holding s should stop, not backwards
-                float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime;
-                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed;
+                float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime * boostZoneMultiplier;
+                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
 
                 if (rb != null)
                 {
@@ -71,6 +74,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isInDeadZone = true;
         }
+        if (col.gameObject.tag == "BoostZone")
+        {
+            boostZoneMultiplier = 3f;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D col)
@@ -79,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isInDeadZone = false;
             deadZoneTimer = 0f;
+        }
+        if (col.gameObject.tag == "BoostZone")
+        {
+            boostZoneMultiplier = 1f;
         }
     }
 
