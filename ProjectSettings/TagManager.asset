@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DeadZone
   - Star
+  - BoostZone
   layers:
   - Default
   - TransparentFX
