@@ -31,12 +31,18 @@ public class PlayerMovement : MonoBehaviour
 
             if (!isInDeadZone)
             {
-                float forwardVelocity = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-                float angularVelocity = Input.GetAxis("Horizontal") * turnSpeed;
+                //Acceleration, decceleration ,holding s should stop, not backwards
+                float forwardVelocity = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime;
+                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed;
 
                 if (rb != null)
                 {
-                    rb.AddForce(transform.up * forwardVelocity);
+                    
+
+                    float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
+                    Debug.Log(dotProduct);
+                    if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
+                        rb.AddForce(transform.up * forwardVelocity);
                     rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
                     maxVelocity = 6f;
                 }
