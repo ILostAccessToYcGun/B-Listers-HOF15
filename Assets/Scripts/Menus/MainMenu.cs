@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Play");
         //Change Scene
+        SceneManager.LoadScene(1);
     }
 
     public void OnCredits()
