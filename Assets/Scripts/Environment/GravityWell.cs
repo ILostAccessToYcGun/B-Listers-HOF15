@@ -18,6 +18,7 @@ public class GravityWell : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        collision.attachedRigidbody.AddForce(GetPointingTransform(collision) * GetDistance(collision) * pullForce);
+        //as distance approaches 0,  force increases
+        collision.attachedRigidbody.AddForce(GetPointingTransform(collision) * pullForce / Mathf.Clamp(GetDistance(collision), 3f, 100f));
     }
 }
