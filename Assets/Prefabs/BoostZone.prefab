@@ -57,7 +57,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -249,7 +249,6 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -1, y: -1}
       - {x: -1, y: 1}
-      - {x: 6.748413, y: 1.907959}
       - {x: 9.758041, y: 2.2606258}
       - {x: 12.940001, y: 3.8500004}
       - {x: 12.614918, y: 0.5490322}
