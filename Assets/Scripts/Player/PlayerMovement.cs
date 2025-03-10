@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] FollowPlayer followCam;
     [SerializeField] Tutorial tutorial;
+    [SerializeField] GameObject nightyNight;
+
     //[SerializeField] SpriteRenderer[] bodySegments;
 
     [Space]
@@ -53,6 +55,17 @@ public class PlayerMovement : MonoBehaviour
     public void SetGravityZoneBoolOn()
     {
         isInGravityZone = false;
+    }
+
+    public void Nightynight()
+    {
+        nightyNight.SetActive(true);
+        Invoke("ReturnToMenu", 5f);
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void Start()
@@ -78,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     followCam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(followCam.GetComponent<Camera>().orthographicSize, 1f, Time.fixedDeltaTime / 20f);
                     rb.MoveRotation(rb.rotation + -(120) * Time.fixedDeltaTime);
-                    colourAdjustments.colorFilter.value = Color.Lerp(colourAdjustments.colorFilter.value, Color.black, Time.fixedDeltaTime / 20f);
+                    colourAdjustments.colorFilter.value = Color.Lerp(colourAdjustments.colorFilter.value, Color.black, Time.fixedDeltaTime / 10f);
                 }
                 else if (!isInDeadZone)
                 {
@@ -129,8 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (colourAdjustments.postExposure.value >= 11.5f)
             {
-                Debug.Log("dead"); //change scene to title here
-                SceneManager.LoadScene(0);
+                ReturnToMenu();
             }
         }
 
@@ -168,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
             killZone.SetActive(false);
             isFinished = true;
             followCam.ChangeTarget(col.transform, 5);
+            Invoke("Nightynight", 5f);
 
             
         }
