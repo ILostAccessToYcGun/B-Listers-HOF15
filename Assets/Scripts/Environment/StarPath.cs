@@ -76,16 +76,17 @@ public class StarPath : MonoBehaviour
             if (collision.transform.tag == "Player")
             {
                 this.cirCollider.enabled = false;
-                gravityWell.SetActive(false);
+                
                 routeToGo += 1;
                 if (routeToGo <= routes.Length - 1)
                 {
+                    gravityWell.SetActive(false);
                     coroutineAllowed = true;
                     starTrail.isSpawningStars = true;
 
                     if (routeToGo == 2)
                     {
-                        Invoke("GrowStar()", 2);
+                        Invoke("GrowStar", 2);
                     }
                 }
                 else
