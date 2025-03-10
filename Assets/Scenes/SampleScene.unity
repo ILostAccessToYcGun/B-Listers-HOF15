@@ -5910,7 +5910,7 @@ Transform:
   m_Children:
   - {fileID: 120443414}
   - {fileID: 1392694021}
-  m_Father: {fileID: 1778937670}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &860687589
 MonoBehaviour:
@@ -5943,7 +5943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &921396604
 Transform:
   m_ObjectHideFlags: 0
@@ -17092,6 +17092,7 @@ MonoBehaviour:
   moveSpeed: 0.15
   starTrail: {fileID: 1492959967}
   gravityWell: {fileID: 1554617928}
+  finishZone: {fileID: 0}
   cirCollider: {fileID: 1492959968}
   starParicles: {fileID: 1398109511}
 --- !u!114 &1492959967
@@ -17405,7 +17406,6 @@ Transform:
   - {fileID: 2086059387}
   - {fileID: 1058538175}
   - {fileID: 1185385302}
-  - {fileID: 860687588}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1778937671
@@ -17727,6 +17727,7 @@ MonoBehaviour:
   moveSpeed: 0.01
   starTrail: {fileID: 0}
   gravityWell: {fileID: 0}
+  finishZone: {fileID: 0}
   cirCollider: {fileID: 0}
   starParicles: {fileID: 0}
 --- !u!212 &2030085463
@@ -18231,6 +18232,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 860687588}
   - {fileID: 1778937670}
   - {fileID: 1162803198}
   - {fileID: 1853782901}
