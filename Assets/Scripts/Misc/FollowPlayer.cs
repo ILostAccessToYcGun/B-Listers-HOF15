@@ -11,8 +11,18 @@ public class FollowPlayer : MonoBehaviour
         
     }
 
-    void Update()
-    { 
-        transform.rotation = Quaternion.identity;
+    void FixedUpdate() //try changing rotation instead of position and child the camera
+    {
+        transform.position = Vector3.MoveTowards(transform.position, 
+            new Vector3(target.position.x + offset.x, target.position.y + offset.y, offset.z), 
+            speed * Time.deltaTime);
+
+        //transform.rotation = Quaternion.identity;
+    }
+
+
+    public void ChangeTarget(Transform _target)
+    {
+        target = _target;
     }
 }
