@@ -14,6 +14,8 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] public StarPath killZone;
 
+    [SerializeField] private GameObject controls;
+
     AudioManager audioManager;
 
     bool zoomCam;
@@ -65,6 +67,7 @@ public class Tutorial : MonoBehaviour
         zoomCam = true;
         Time.timeScale = 0.07f;
         audioManager.Play("Shine");
+        controls.SetActive(true);
 
         yield return new WaitForSeconds(0.12f);
         //back to player
@@ -74,5 +77,6 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         tutorialPlaying = false;
         killZone.coroutineAllowed = true;
+        controls.SetActive(false);
     }
 }
