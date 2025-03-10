@@ -5,7 +5,7 @@ using System.Collections;
 public class StarPath : MonoBehaviour
 {
     [SerializeField] private Transform[] routes;
-    private int routeToGo;
+    [SerializeField] private int routeToGo;
 
     private float tParam = 0f;
 
@@ -15,7 +15,10 @@ public class StarPath : MonoBehaviour
 
     private bool coroutineAllowed = true;
     [SerializeField] StarTrail starTrail;
+    [SerializeField] GameObject gravityWell;
+    [SerializeField] Collider2D cirCollider;
 
+    
     void Start()
     {
         routeToGo = 0;
@@ -28,6 +31,8 @@ public class StarPath : MonoBehaviour
             StartCoroutine(Schmove(routeToGo));
         }
     }
+
+    
 
     private IEnumerator Schmove(int routeNumber)
     {
@@ -54,16 +59,41 @@ public class StarPath : MonoBehaviour
         }
 
         tParam = 0f;
+        starTrail.isSpawningStars = false;
+        this.cirCollider.enabled = true;
+        gravityWell.SetActive(true);
+    }
 
-        routeToGo += 1;
+    public void GrowStar()
+    {
+        transform.localScale = new Vector3(3, 3, 3);
+    }
 
-        if (routeToGo < routes.Length - 1)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (tParam <= 0)
         {
-            coroutineAllowed = true;
-        }
-        else
-        {
-            starTrail.isSpawningStars = false;
+            if (collision.transform.tag == "Player")
+            {
+                this.cirCollider.enabled = false;
+                gravityWell.SetActive(false);
+                routeToGo += 1;
+                if (routeToGo <= routes.Length - 1)
+                {
+                    coroutineAllowed = true;
+                    starTrail.isSpawningStars = true;
+
+                    if (routeToGo == 2)
+                    {
+                        Invoke("GrowStar()", 2);
+                    }
+                }
+                else
+                {
+                    Debug.Log("End of routes");
+                }
+            }
+            
         }
     }
 }
