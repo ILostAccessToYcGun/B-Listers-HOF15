@@ -1,4 +1,8 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,18 +23,33 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isInGravityZone;
     [SerializeField] float deadZoneTimer;
     [SerializeField] float boostZoneMultiplier;
+    [SerializeField] bool isFinished;
+    [SerializeField] GameObject killZone;
+
+
+    [Space]
+    [Header("Camera")]
+    [SerializeField] Volume postProcessing;
+    [SerializeField] ColorAdjustments colourAdjustments;
+    [SerializeField] private float speed;
+    [SerializeField] FollowPlayer followCam;
+    [SerializeField] Tutorial tutorial;
+    [SerializeField] GameObject nightyNight;
+
+    //[SerializeField] SpriteRenderer[] bodySegments;
 
     [Space]
     [Header("Boost")]
     [SerializeField] float boostMaxVelocity;
     [SerializeField] float boostSpeed;
 
+    AudioManager audioManager;
 
     public void Boost()
     {
         //increase max velocity
-        boostMaxVelocity += 2f;
-        boostSpeed += 1f;
+        boostMaxVelocity += 0.5f;
+        boostSpeed += 0.5f;
     }
 
     public void SetGravityZoneBoolOn()
@@ -38,58 +57,99 @@ public class PlayerMovement : MonoBehaviour
         isInGravityZone = false;
     }
 
+    public void Nightynight()
+    {
+        nightyNight.SetActive(true);
+        Invoke("ReturnToMenu", 5f);
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         transform = this.transform;
+        postProcessing.profile.TryGet<ColorAdjustments>(out colourAdjustments);
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
+        //bodySegments = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
         if (isAlive)
         {
-            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, (maxVelocity + boostMaxVelocity) * boostZoneMultiplier);
-
-            if (!isInDeadZone)
+            if (!tutorial.tutorialPlaying)
             {
-                //Acceleration, decceleration ,holding s should stop, not backwards
-                float forwardVelocity = Input.GetAxisRaw("Vertical") * (moveSpeed + boostSpeed) * Time.fixedDeltaTime * boostZoneMultiplier;
-                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
+                rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, (maxVelocity + boostMaxVelocity) * boostZoneMultiplier);
 
-                if (!isInGravityZone)
-                    rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime / 10), Mathf.Lerp(rb.linearVelocity.y, 0, Time.fixedDeltaTime / 10));
 
-                if (rb != null)
+
+                if (isFinished)
                 {
-                    float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
-                    if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
-                    {
-                        rb.AddForce(transform.up * forwardVelocity);
-                    }
-                    rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
-                    maxVelocity = 4f;
+                    followCam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(followCam.GetComponent<Camera>().orthographicSize, 1f, Time.fixedDeltaTime / 20f);
+                    rb.MoveRotation(rb.rotation + -(120) * Time.fixedDeltaTime);
+                    colourAdjustments.colorFilter.value = Color.Lerp(colourAdjustments.colorFilter.value, Color.black, Time.fixedDeltaTime / 10f);
                 }
-            }
-            else
-            {
-                deadZoneTimer += Time.deltaTime;
-                maxVelocity = 0.8f;
-            }
+                else if (!isInDeadZone)
+                {
+                    //Acceleration, decceleration ,holding s should stop, not backwards
+                    float forwardVelocity = Input.GetAxisRaw("Vertical") * (moveSpeed + boostSpeed) * Time.fixedDeltaTime * boostZoneMultiplier;
+                    float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
 
-            if (deadZoneTimer >= 5)
-            {
-                isAlive = false;
+                    if (!isInGravityZone)
+                        rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime / 10), Mathf.Lerp(rb.linearVelocity.y, 0, Time.fixedDeltaTime / 10f));
+
+                    if (rb != null)
+                    {
+                        float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
+                        if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
+                        {
+                            rb.AddForce(transform.up * forwardVelocity);
+                        }
+                        rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
+                        maxVelocity = 4f;
+                    }
+                }
+                else
+                {
+                    deadZoneTimer += Time.deltaTime;
+                    maxVelocity = 0.8f;
+                }
+
+                
+
+
+                if (deadZoneTimer >= 5)
+                {
+                    isAlive = false;
+                }
+
             }
         }
         else
         {
-            Debug.Log("dead");
+            Debug.Log(colourAdjustments.postExposure.value);
+            colourAdjustments.postExposure.value = Mathf.Lerp(colourAdjustments.postExposure.value, 12, Time.fixedDeltaTime / 10);
+
+            //foreach (SpriteRenderer segment in bodySegments)
+            //{
+            //    segment.color = Color.Lerp(segment.color, Color.black, Time.fixedDeltaTime / 10);
+            //}
+            //bodySegments
+
+            if (colourAdjustments.postExposure.value >= 11.5f)
+            {
+                ReturnToMenu();
+            }
         }
 
         if (boostMaxVelocity > 0)
-            boostMaxVelocity = Mathf.Clamp(boostMaxVelocity - Time.fixedDeltaTime / 5, 0, 100);
+            boostMaxVelocity = Mathf.Clamp(boostMaxVelocity - Time.fixedDeltaTime / 7.5f, 0, 100);
         if (boostSpeed > 0)
-            boostSpeed = Mathf.Clamp(boostSpeed - Time.fixedDeltaTime / 5, 0, 100);
+            boostSpeed = Mathf.Clamp(boostSpeed - Time.fixedDeltaTime / 7.5f, 0, 100);
 
 
     }
@@ -98,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "DeadZone")
         {
+            audioManager.Play("Static");
             isInDeadZone = true;
         }
         if (col.gameObject.tag == "GravityZone")
@@ -110,7 +171,18 @@ public class PlayerMovement : MonoBehaviour
         }
         if (col.gameObject.tag == "Die")
         {
+            audioManager.Play("AlarmClock");
             isAlive = false;
+        }
+        if (col.gameObject.tag == "Finish")
+        {
+            Debug.Log("finish pls");
+            killZone.SetActive(false);
+            isFinished = true;
+            followCam.ChangeTarget(col.transform, 5);
+            Invoke("Nightynight", 5f);
+
+            
         }
     }
 
@@ -118,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "DeadZone")
         {
+            audioManager.Stop("Static");
             isInDeadZone = false;
             deadZoneTimer = 0f;
         }

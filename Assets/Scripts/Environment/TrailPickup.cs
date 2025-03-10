@@ -6,12 +6,18 @@ public class TrailPickup : MonoBehaviour
     [SerializeField] PlayerMovement player;
     [SerializeField] float magnetSpeed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private GameObject burstVFX;
 
+    AudioManager audioManager;
 
     private bool ConsumeCheck()
     {
-
         return (player.transform.position - transform.position).magnitude < 0.1f;
+    }
+    
+    void Start()
+    {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
     }
 
     private void Awake()
@@ -41,6 +47,13 @@ public class TrailPickup : MonoBehaviour
             if (ConsumeCheck())
             {
                 player.Boost();
+                audioManager.Play("Spark");
+
+                GameObject b = Instantiate(burstVFX, player.transform.position, Quaternion.identity);
+                b.transform.parent = player.transform;
+                Destroy(b, 0.5f);
+
+
                 Destroy(this.gameObject);
             }
         }

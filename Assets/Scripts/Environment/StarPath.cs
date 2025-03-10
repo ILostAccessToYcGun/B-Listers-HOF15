@@ -5,7 +5,7 @@ using System.Collections;
 public class StarPath : MonoBehaviour
 {
     [SerializeField] private Transform[] routes;
-    private int routeToGo;
+    [SerializeField] private int routeToGo;
 
     private float tParam = 0f;
 
@@ -13,21 +13,33 @@ public class StarPath : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 0.5f;
 
-    private bool coroutineAllowed = true;
+    public bool coroutineAllowed;
+    public bool isKillZone;
+    [Space]
+    [Header("Objects")]
     [SerializeField] StarTrail starTrail;
+    [SerializeField] GameObject gravityWell;
+    [SerializeField] GameObject finishZone;
+    [SerializeField] Collider2D cirCollider;
+    [SerializeField] ParticleSystem starParicles;
 
+    AudioManager audioManager;
+    
     void Start()
     {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
         routeToGo = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (coroutineAllowed)
         {
             StartCoroutine(Schmove(routeToGo));
         }
     }
+
+    
 
     private IEnumerator Schmove(int routeNumber)
     {
@@ -54,16 +66,66 @@ public class StarPath : MonoBehaviour
         }
 
         tParam = 0f;
-
-        routeToGo += 1;
-
-        if (routeToGo < routes.Length - 1)
-        {
-            coroutineAllowed = true;
-        }
-        else
-        {
+        if (starTrail != null)
             starTrail.isSpawningStars = false;
+        if (cirCollider != null)
+            cirCollider.enabled = true;
+        if (gravityWell != null)
+            gravityWell.SetActive(true);
+        if (starParicles != null)
+            starParicles.Stop();
+        
+        if (isKillZone)
+        {
+            routeToGo += 1;
+            if (routeToGo <= routes.Length - 1)
+            {
+                coroutineAllowed = true;
+            }
+            else
+            {
+                Debug.Log("End of routes");
+            }
+        }
+    }
+
+    public void GrowStar()
+    {
+        transform.localScale = new Vector3(3, 3, 3);
+        finishZone.SetActive(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.transform.name);
+        if (tParam <= 0)
+        {
+            if (collision.transform.tag == "Player") //GRRRRR
+            { 
+                audioManager.Play("Collect");
+
+                if (cirCollider != null)
+                    cirCollider.enabled = false;
+                
+                routeToGo += 1;
+                if (routeToGo <= routes.Length - 1)
+                {
+                    gravityWell.SetActive(false);
+                    starParicles.Play();
+                    coroutineAllowed = true;
+                    starTrail.isSpawningStars = true;
+
+                    if (routeToGo == 2)
+                    {
+                        Invoke("GrowStar", 2);
+                    }
+                }
+                else
+                {
+                    Debug.Log("End of routes");
+                }
+            }
+            
         }
     }
 }
