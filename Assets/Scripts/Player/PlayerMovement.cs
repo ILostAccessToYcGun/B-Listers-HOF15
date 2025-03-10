@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float boostMaxVelocity;
     [SerializeField] float boostSpeed;
 
+    AudioManager audioManager;
 
     public void Boost()
     {
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         transform = this.transform;
         postProcessing.profile.TryGet<ColorAdjustments>(out colourAdjustments);
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
         //bodySegments = GetComponentsInChildren<SpriteRenderer>();
     }
 
@@ -106,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isAlive = false;
                 }
+
             }
         }
         else
@@ -138,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "DeadZone")
         {
+            audioManager.Play("Static");
             isInDeadZone = true;
         }
         if (col.gameObject.tag == "GravityZone")
@@ -150,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (col.gameObject.tag == "Die")
         {
+            audioManager.Play("AlarmClock");
             isAlive = false;
         }
         if (col.gameObject.tag == "Finish")
@@ -165,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "DeadZone")
         {
+            audioManager.Stop("Static");
             isInDeadZone = false;
             deadZoneTimer = 0f;
         }

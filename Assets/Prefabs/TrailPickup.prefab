@@ -151,6 +151,7 @@ MonoBehaviour:
   isPickedUp: 0
   player: {fileID: 0}
   magnetSpeed: 0
+  burstVFX: {fileID: 1320105766948476562, guid: b756c332d36142340a59b05e77383725, type: 3}
 --- !u!58 &3661769823756271417
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,13 @@ public class MainMenu : MonoBehaviour
     bool zoomCam;
     static float t = 0.0f;
 
-    
+    AudioManager audioManager;
+
+    void Start()
+    {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
+        audioManager.StopAllSounds();
+    }
 
     void Update()
     {

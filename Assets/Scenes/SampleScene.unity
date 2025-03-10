@@ -5403,7 +5403,7 @@ Transform:
   - {fileID: 1102047888}
   - {fileID: 800540896}
   - {fileID: 95193405}
-  m_Father: {fileID: 1536288194}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &423460402
 PrefabInstance:
@@ -5883,7 +5883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -6920,7 +6920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -7833,7 +7833,7 @@ Transform:
   - {fileID: 1579872174}
   - {fileID: 2139455119}
   - {fileID: 163248019}
-  m_Father: {fileID: 1536288194}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1066065120
 MonoBehaviour:
@@ -8660,7 +8660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -9198,7 +9198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721026341520148577, guid: 642302f3442f2a64c9ae228a5d065067, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -10073,7 +10073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -20135,7 +20135,7 @@ Transform:
   - {fileID: 1446011634}
   - {fileID: 204783783}
   - {fileID: 26566757}
-  m_Father: {fileID: 1536288194}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492959964
 GameObject:
@@ -21019,7 +21019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -21318,6 +21318,99 @@ Transform:
   - {fileID: 613354586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1740130043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1740130045}
+  - component: {fileID: 1740130044}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1740130044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740130043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7ac261e0881ee4582eeeaf06e3d11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: AlarmClock
+    clip: {fileID: 8300000, guid: d067ad9104a96054f8c28a031de9ab67, type: 3}
+    volume: 0.6
+    pitch: 0.95
+    loop: 0
+    source: {fileID: 0}
+  - name: Menu
+    clip: {fileID: 8300000, guid: f5f1ccbb5900ef34f843c9773f3e852b, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: Collect
+    clip: {fileID: 8300000, guid: 20e9774f94839f64095c66a43bb6befd, type: 3}
+    volume: 0.2
+    pitch: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: SpaceAmbience
+    clip: {fileID: 8300000, guid: 16acf4c2509e4f7409e3efc6c03c2e5b, type: 3}
+    volume: 0.2
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  - name: Shine
+    clip: {fileID: 8300000, guid: de43a34bd3ffd5e41a521b6eb44c9188, type: 3}
+    volume: 1
+    pitch: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: Select
+    clip: {fileID: 8300000, guid: 8a9d9b47393a0da4a826495cdf43612f, type: 3}
+    volume: 0.3
+    pitch: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: Static
+    clip: {fileID: 8300000, guid: 379fcc3d961b2b242a5afec1514b508f, type: 3}
+    volume: 0.3
+    pitch: 0.95
+    loop: 0
+    source: {fileID: 0}
+  - name: Spark
+    clip: {fileID: 8300000, guid: 412bdfd1622983e48afbd8b6ef526e94, type: 3}
+    volume: 1
+    pitch: 1.3
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1740130045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740130043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.180803, y: 79.08149, z: -0.32076955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1778937668
 GameObject:
   m_ObjectHideFlags: 0
@@ -21589,7 +21682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -21803,7 +21896,7 @@ MonoBehaviour:
   routeToGo: 0
   moveSpeed: 0.041
   coroutineAllowed: 0
-  isKillZone: 1
+  isKillZone: 0
   starTrail: {fileID: 0}
   gravityWell: {fileID: 0}
   finishZone: {fileID: 0}
@@ -22880,5 +22973,8 @@ SceneRoots:
   - {fileID: 1492959965}
   - {fileID: 2030085464}
   - {fileID: 786052605}
-  - {fileID: 1536288194}
   - {fileID: 1739103068}
+  - {fileID: 382741494}
+  - {fileID: 1066065119}
+  - {fileID: 1489909579}
+  - {fileID: 1740130045}

@@ -691,9 +691,9 @@ MonoBehaviour:
     pitch: 1.1
     source: {fileID: 0}
   - name: Static
-    clip: {fileID: 8300000, guid: 946dc8b300821fc478196f2e92fd7f3f, type: 3}
+    clip: {fileID: 8300000, guid: 379fcc3d961b2b242a5afec1514b508f, type: 3}
     volume: 0.3
-    pitch: 1
+    pitch: 0.95
     source: {fileID: 0}
   - name: Spark
     clip: {fileID: 8300000, guid: 412bdfd1622983e48afbd8b6ef526e94, type: 3}
@@ -1678,18 +1678,17 @@ MonoBehaviour:
     Alarm
     Clock Digital - Zanox
 
-    Complex static and warbles 2 - VonKrapFamily
+    static noise - lartti
 
-    select/enter
-    - plasterbrain
+    select/enter - plasterbrain
 
-    Diamond Click - MATRIXXX_
+    Diamond
+    Click - MATRIXXX_
 
 
     Fonts:
 
-    Nice Sugar -
-    KhurasanStudio'
+    Nice Sugar - KhurasanStudio'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90c3735843672b743a467129688b5c99, type: 2}
   m_sharedMaterial: {fileID: -7167826096296732410, guid: 90c3735843672b743a467129688b5c99, type: 2}

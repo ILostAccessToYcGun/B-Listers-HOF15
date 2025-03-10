@@ -23,6 +23,8 @@ public class Tutorial : MonoBehaviour
     {
         audioManager = GameObject.FindObjectOfType<AudioManager>();
         StartCoroutine(TutorialZoom());
+
+        audioManager.Play("SpaceAmbience");
     }
 
     void Update()
