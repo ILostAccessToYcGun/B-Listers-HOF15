@@ -672,28 +672,33 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Collect
     clip: {fileID: 8300000, guid: 20e9774f94839f64095c66a43bb6befd, type: 3}
-    volume: 0.4
-    pitch: 1
+    volume: 0.2
+    pitch: 1.1
     source: {fileID: 0}
   - name: SpaceAmbience
     clip: {fileID: 8300000, guid: 16acf4c2509e4f7409e3efc6c03c2e5b, type: 3}
     volume: 0.2
     pitch: 1
     source: {fileID: 0}
-  - name: StarTutoShine
+  - name: Shine
     clip: {fileID: 8300000, guid: de43a34bd3ffd5e41a521b6eb44c9188, type: 3}
-    volume: 0.5
-    pitch: 1
+    volume: 0.9
+    pitch: 1.1
     source: {fileID: 0}
   - name: Select
     clip: {fileID: 8300000, guid: 8a9d9b47393a0da4a826495cdf43612f, type: 3}
     volume: 0.3
-    pitch: 1
+    pitch: 1.1
     source: {fileID: 0}
   - name: Static
     clip: {fileID: 8300000, guid: 946dc8b300821fc478196f2e92fd7f3f, type: 3}
     volume: 0.3
     pitch: 1
+    source: {fileID: 0}
+  - name: Spark
+    clip: {fileID: 8300000, guid: 412bdfd1622983e48afbd8b6ef526e94, type: 3}
+    volume: 1
+    pitch: 1.3
     source: {fileID: 0}
 --- !u!4 &224976205
 Transform:
@@ -1678,10 +1683,13 @@ MonoBehaviour:
     select/enter
     - plasterbrain
 
+    Diamond Click - MATRIXXX_
+
 
     Fonts:
 
-    Nice Sugar - KhurasanStudio'
+    Nice Sugar -
+    KhurasanStudio'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90c3735843672b743a467129688b5c99, type: 2}
   m_sharedMaterial: {fileID: -7167826096296732410, guid: 90c3735843672b743a467129688b5c99, type: 2}
