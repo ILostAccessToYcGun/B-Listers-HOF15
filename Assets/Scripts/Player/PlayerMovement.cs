@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float boostZoneMultiplier;
     [SerializeField] Volume postProcessing;
     [SerializeField] ColorAdjustments colourAdjustments;
-    [SerializeField] SpriteRenderer[] bodySegments;
+    //[SerializeField] SpriteRenderer[] bodySegments;
 
     [Space]
     [Header("Boost")]
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         transform = this.transform;
         postProcessing.profile.TryGet<ColorAdjustments>(out colourAdjustments);
-        bodySegments = GetComponentsInChildren<SpriteRenderer>();
+        //bodySegments = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -95,10 +95,10 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log(colourAdjustments.postExposure.value);
             colourAdjustments.postExposure.value = Mathf.Lerp(colourAdjustments.postExposure.value, 12, Time.fixedDeltaTime / 10);
 
-            foreach (SpriteRenderer segment in bodySegments)
-            {
-                segment.color = Color.Lerp(segment.color, Color.black, Time.fixedDeltaTime / 10);
-            }
+            //foreach (SpriteRenderer segment in bodySegments)
+            //{
+            //    segment.color = Color.Lerp(segment.color, Color.black, Time.fixedDeltaTime / 10);
+            //}
             //bodySegments
 
             if (colourAdjustments.postExposure.value >= 11.5f)
