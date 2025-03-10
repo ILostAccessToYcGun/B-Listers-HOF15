@@ -14,9 +14,13 @@ public class StarPath : MonoBehaviour
     [SerializeField] private float moveSpeed = 0.5f;
 
     private bool coroutineAllowed = true;
+    [Space]
+    [Header("Objects")]
     [SerializeField] StarTrail starTrail;
     [SerializeField] GameObject gravityWell;
+    [SerializeField] GameObject finishZone;
     [SerializeField] Collider2D cirCollider;
+    [SerializeField] ParticleSystem starParicles;
 
     
     void Start()
@@ -62,11 +66,13 @@ public class StarPath : MonoBehaviour
         starTrail.isSpawningStars = false;
         this.cirCollider.enabled = true;
         gravityWell.SetActive(true);
+        starParicles.Stop();
     }
 
     public void GrowStar()
     {
         transform.localScale = new Vector3(3, 3, 3);
+        finishZone.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,6 +87,7 @@ public class StarPath : MonoBehaviour
                 if (routeToGo <= routes.Length - 1)
                 {
                     gravityWell.SetActive(false);
+                    starParicles.Play();
                     coroutineAllowed = true;
                     starTrail.isSpawningStars = true;
 

@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //increase max velocity
         boostMaxVelocity += 2f;
-        boostSpeed += 1f;
+        boostSpeed += 2f;
     }
 
     public void SetGravityZoneBoolOn()
@@ -87,9 +87,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (boostMaxVelocity > 0)
-            boostMaxVelocity = Mathf.Clamp(boostMaxVelocity - Time.fixedDeltaTime / 5, 0, 100);
+            boostMaxVelocity = Mathf.Clamp(boostMaxVelocity - Time.fixedDeltaTime / 7.5f, 0, 100);
         if (boostSpeed > 0)
-            boostSpeed = Mathf.Clamp(boostSpeed - Time.fixedDeltaTime / 5, 0, 100);
+            boostSpeed = Mathf.Clamp(boostSpeed - Time.fixedDeltaTime / 7.5f, 0, 100);
 
 
     }
