@@ -10385,7 +10385,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: 8aed5bbd07b301e42a7fd49079d3ae5e, type: 3}
-  m_Color: {r: 1, g: 0.87600094, b: 0.49999988, a: 1}
+  m_Color: {r: 1, g: 0.89386797, b: 0.57547164, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11200,7 +11200,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043436688}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.0146906525, g: 0.007199055, b: 0.025157154, a: 0}
@@ -22130,7 +22130,7 @@ MonoBehaviour:
   moveSpeed: 0.15
   starTrail: {fileID: 1492959967}
   gravityWell: {fileID: 1554617928}
-  finishZone: {fileID: 0}
+  finishZone: {fileID: 921396603}
   cirCollider: {fileID: 1492959968}
   starParicles: {fileID: 1398109511}
 --- !u!114 &1492959967
@@ -27259,6 +27259,9 @@ MonoBehaviour:
   isInGravityZone: 0
   deadZoneTimer: 0
   boostZoneMultiplier: 1
+  postProcessing: {fileID: 1413080809}
+  colourAdjustments: {fileID: 0}
+  bodySegments: []
   boostMaxVelocity: 0
   boostSpeed: 0
 --- !u!4 &1778937670
@@ -27277,10 +27280,6 @@ Transform:
   - {fileID: 2086059387}
   - {fileID: 1058538175}
   - {fileID: 1185385302}
-  - {fileID: 860687588}
-  - {fileID: 860687588}
-  - {fileID: 860687588}
-  - {fileID: 860687588}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1778937671
