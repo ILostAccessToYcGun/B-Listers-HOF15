@@ -14,6 +14,7 @@ public class StarPath : MonoBehaviour
     [SerializeField] private float moveSpeed = 0.5f;
 
     public bool coroutineAllowed;
+    public bool isKillZone;
     [Space]
     [Header("Objects")]
     [SerializeField] StarTrail starTrail;
@@ -74,6 +75,19 @@ public class StarPath : MonoBehaviour
             gravityWell.SetActive(true);
         if (starParicles != null)
             starParicles.Stop();
+        
+        if (isKillZone)
+        {
+            routeToGo += 1;
+            if (routeToGo <= routes.Length - 1)
+            {
+                coroutineAllowed = true;
+            }
+            else
+            {
+                Debug.Log("End of routes");
+            }
+        }
     }
 
     public void GrowStar()
@@ -84,12 +98,16 @@ public class StarPath : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.transform.name);
         if (tParam <= 0)
         {
-            if (collision.transform.tag == "Player")
+            if (collision.transform.tag == "Player") //GRRRRR
             {
                 this.cirCollider.enabled = false;
                 audioManager.Play("Collect");
+                Debug.Log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                if (cirCollider != null)
+                    cirCollider.enabled = false;
                 
                 routeToGo += 1;
                 if (routeToGo <= routes.Length - 1)
