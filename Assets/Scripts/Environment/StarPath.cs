@@ -22,9 +22,12 @@ public class StarPath : MonoBehaviour
     [SerializeField] Collider2D cirCollider;
     [SerializeField] ParticleSystem starParicles;
 
+    AudioManager audioManager;
+
     
     void Start()
     {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
         routeToGo = 0;
     }
 
@@ -86,6 +89,7 @@ public class StarPath : MonoBehaviour
             if (collision.transform.tag == "Player")
             {
                 this.cirCollider.enabled = false;
+                audioManager.Play("Collect");
                 
                 routeToGo += 1;
                 if (routeToGo <= routes.Length - 1)

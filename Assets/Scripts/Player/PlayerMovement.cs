@@ -44,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
     public void Boost()
     {
         //increase max velocity
-        boostMaxVelocity += 2.5f;
-        boostSpeed += 2.5f;
+        boostMaxVelocity += 0.5f;
+        boostSpeed += 0.5f;
     }
 
     public void SetGravityZoneBoolOn()
