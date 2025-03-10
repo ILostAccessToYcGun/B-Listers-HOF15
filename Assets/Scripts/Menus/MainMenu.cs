@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour
     bool zoomCam;
     static float t = 0.0f;
 
+    
+
     void Update()
     {
         if (zoomCam)
