@@ -5775,6 +5775,7 @@ MonoBehaviour:
   camScript: {fileID: 860687589}
   speed: 0.5
   tutorialPlaying: 1
+  killZone: {fileID: 2030085462}
 --- !u!4 &786052605
 Transform:
   m_ObjectHideFlags: 0
@@ -17108,6 +17109,7 @@ MonoBehaviour:
   - {fileID: 1489909579}
   routeToGo: 0
   moveSpeed: 0.15
+  coroutineAllowed: 1
   starTrail: {fileID: 1492959967}
   gravityWell: {fileID: 1554617928}
   finishZone: {fileID: 921396603}
@@ -17751,6 +17753,7 @@ MonoBehaviour:
   - {fileID: 1489909579}
   routeToGo: 0
   moveSpeed: 0.041
+  coroutineAllowed: 0
   starTrail: {fileID: 0}
   gravityWell: {fileID: 0}
   finishZone: {fileID: 0}

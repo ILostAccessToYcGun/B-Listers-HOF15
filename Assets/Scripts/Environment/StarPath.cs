@@ -13,7 +13,7 @@ public class StarPath : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 0.5f;
 
-    private bool coroutineAllowed = true;
+    public bool coroutineAllowed;
     [Space]
     [Header("Objects")]
     [SerializeField] StarTrail starTrail;
@@ -63,10 +63,14 @@ public class StarPath : MonoBehaviour
         }
 
         tParam = 0f;
-        starTrail.isSpawningStars = false;
-        this.cirCollider.enabled = true;
-        gravityWell.SetActive(true);
-        starParicles.Stop();
+        if (starTrail != null)
+            starTrail.isSpawningStars = false;
+        if (cirCollider != null)
+            cirCollider.enabled = true;
+        if (gravityWell != null)
+            gravityWell.SetActive(true);
+        if (starParicles != null)
+            starParicles.Stop();
     }
 
     public void GrowStar()

@@ -12,6 +12,8 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] public bool tutorialPlaying = true;
 
+    [SerializeField] public StarPath killZone;
+
 
     bool zoomCam;
     static float t = 0.0f;
@@ -66,5 +68,6 @@ public class Tutorial : MonoBehaviour
         Time.timeScale = 1f;
         yield return new WaitForSeconds(0.1f);
         tutorialPlaying = false;
+        killZone.coroutineAllowed = true;
     }
 }
