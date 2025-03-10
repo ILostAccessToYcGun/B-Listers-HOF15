@@ -17093,6 +17093,7 @@ MonoBehaviour:
   starTrail: {fileID: 1492959967}
   gravityWell: {fileID: 1554617928}
   cirCollider: {fileID: 1492959968}
+  starParicles: {fileID: 1398109511}
 --- !u!114 &1492959967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17727,6 +17728,7 @@ MonoBehaviour:
   starTrail: {fileID: 0}
   gravityWell: {fileID: 0}
   cirCollider: {fileID: 0}
+  starParicles: {fileID: 0}
 --- !u!212 &2030085463
 SpriteRenderer:
   m_ObjectHideFlags: 0
