@@ -102,10 +102,9 @@ public class StarPath : MonoBehaviour
         if (tParam <= 0)
         {
             if (collision.transform.tag == "Player") //GRRRRR
-            {
-                this.cirCollider.enabled = false;
+
                 audioManager.Play("Collect");
-                Debug.Log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
                 if (cirCollider != null)
                     cirCollider.enabled = false;
                 
