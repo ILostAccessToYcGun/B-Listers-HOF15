@@ -48783,6 +48783,22 @@ PrefabInstance:
       value: 0.07076888
       objectReference: {fileID: 0}
     - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.77546155
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792757911058236734, guid: 3b5b79e0f19f97545aa10fb4ddd2245a, type: 3}
       propertyPath: m_ShapeTexture
       value: 
       objectReference: {fileID: 2800000, guid: ec92b965ea256dd45a4a3ff2f340ed7b, type: 3}
