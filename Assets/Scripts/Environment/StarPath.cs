@@ -28,7 +28,7 @@ public class StarPath : MonoBehaviour
         routeToGo = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (coroutineAllowed)
         {
