@@ -5774,6 +5774,7 @@ MonoBehaviour:
   star: {fileID: 1492959965}
   camScript: {fileID: 860687589}
   speed: 0.5
+  tutorialPlaying: 1
 --- !u!4 &786052605
 Transform:
   m_ObjectHideFlags: 0
@@ -17410,6 +17411,8 @@ MonoBehaviour:
   colourAdjustments: {fileID: 0}
   speed: 0.1
   followCam: {fileID: 860687589}
+  timet: 0
+  tutorial: {fileID: 786052604}
   boostMaxVelocity: 0
   boostSpeed: 0
 --- !u!4 &1778937670
