@@ -10824,7 +10824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &921396604
 Transform:
   m_ObjectHideFlags: 0
@@ -22130,6 +22130,7 @@ MonoBehaviour:
   moveSpeed: 0.15
   starTrail: {fileID: 1492959967}
   gravityWell: {fileID: 1554617928}
+  finishZone: {fileID: 0}
   cirCollider: {fileID: 1492959968}
   starParicles: {fileID: 1398109511}
 --- !u!114 &1492959967
@@ -27601,6 +27602,7 @@ MonoBehaviour:
   moveSpeed: 0.01
   starTrail: {fileID: 0}
   gravityWell: {fileID: 0}
+  finishZone: {fileID: 0}
   cirCollider: {fileID: 0}
   starParicles: {fileID: 0}
 --- !u!212 &2030085463
