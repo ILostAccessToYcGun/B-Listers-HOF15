@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float deadZoneTimer;
     [SerializeField] float boostZoneMultiplier;
     [SerializeField] bool isFinished;
+    [SerializeField] GameObject killZone;
+
 
     [Space]
     [Header("Camera")]
@@ -31,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ColorAdjustments colourAdjustments;
     [SerializeField] private float speed;
     [SerializeField] FollowPlayer followCam;
-    [SerializeField] float timet = 0.0f;
     [SerializeField] Tutorial tutorial;
     //[SerializeField] SpriteRenderer[] bodySegments;
 
@@ -71,7 +72,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, (maxVelocity + boostMaxVelocity) * boostZoneMultiplier);
 
-                if (!isInDeadZone)
+
+
+                if (isFinished)
+                {
+                    followCam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(followCam.GetComponent<Camera>().orthographicSize, 1f, Time.fixedDeltaTime / 20f);
+                    rb.MoveRotation(rb.rotation + -(120) * Time.fixedDeltaTime);
+                    colourAdjustments.colorFilter.value = Color.Lerp(colourAdjustments.colorFilter.value, Color.black, Time.fixedDeltaTime / 20f);
+                }
+                else if (!isInDeadZone)
                 {
                     //Acceleration, decceleration ,holding s should stop, not backwards
                     float forwardVelocity = Input.GetAxisRaw("Vertical") * (moveSpeed + boostSpeed) * Time.fixedDeltaTime * boostZoneMultiplier;
@@ -97,11 +106,7 @@ public class PlayerMovement : MonoBehaviour
                     maxVelocity = 0.8f;
                 }
 
-                if (isFinished)
-                {
-                    timet += speed * Time.unscaledDeltaTime;
-                    followCam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(followCam.GetComponent<Camera>().orthographicSize, 1f, timet);
-                }
+                
 
 
                 if (deadZoneTimer >= 5)
@@ -160,8 +165,10 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "Finish")
         {
             Debug.Log("finish pls");
+            killZone.SetActive(false);
             isFinished = true;
             followCam.ChangeTarget(col.transform, 5);
+
             
         }
     }
