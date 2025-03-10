@@ -23,8 +23,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isInGravityZone;
     [SerializeField] float deadZoneTimer;
     [SerializeField] float boostZoneMultiplier;
+    [SerializeField] bool isFinished;
+
+    [Space]
+    [Header("Camera")]
     [SerializeField] Volume postProcessing;
     [SerializeField] ColorAdjustments colourAdjustments;
+    [SerializeField] private float speed;
+    [SerializeField] FollowPlayer followCam;
+    [SerializeField] float timet = 0.0f;
+    [SerializeField] Tutorial tutorial;
     //[SerializeField] SpriteRenderer[] bodySegments;
 
     [Space]
@@ -36,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
     public void Boost()
     {
         //increase max velocity
-        boostMaxVelocity += 2f;
-        boostSpeed += 2f;
+        boostMaxVelocity += 2.5f;
+        boostSpeed += 2.5f;
     }
 
     public void SetGravityZoneBoolOn()
@@ -57,37 +65,47 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, (maxVelocity + boostMaxVelocity) * boostZoneMultiplier);
-
-            if (!isInDeadZone)
+            if (!tutorial.tutorialPlaying)
             {
-                //Acceleration, decceleration ,holding s should stop, not backwards
-                float forwardVelocity = Input.GetAxisRaw("Vertical") * (moveSpeed + boostSpeed) * Time.fixedDeltaTime * boostZoneMultiplier;
-                float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
+                rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, (maxVelocity + boostMaxVelocity) * boostZoneMultiplier);
 
-                if (!isInGravityZone)
-                    rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime / 10), Mathf.Lerp(rb.linearVelocity.y, 0, Time.fixedDeltaTime / 10));
-
-                if (rb != null)
+                if (!isInDeadZone)
                 {
-                    float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
-                    if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
-                    {
-                        rb.AddForce(transform.up * forwardVelocity);
-                    }
-                    rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
-                    maxVelocity = 4f;
-                }
-            }
-            else
-            {
-                deadZoneTimer += Time.deltaTime;
-                maxVelocity = 0.8f;
-            }
+                    //Acceleration, decceleration ,holding s should stop, not backwards
+                    float forwardVelocity = Input.GetAxisRaw("Vertical") * (moveSpeed + boostSpeed) * Time.fixedDeltaTime * boostZoneMultiplier;
+                    float angularVelocity = Input.GetAxisRaw("Horizontal") * turnSpeed / boostZoneMultiplier;
 
-            if (deadZoneTimer >= 5)
-            {
-                isAlive = false;
+                    if (!isInGravityZone)
+                        rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, Time.fixedDeltaTime / 10), Mathf.Lerp(rb.linearVelocity.y, 0, Time.fixedDeltaTime / 10f));
+
+                    if (rb != null)
+                    {
+                        float dotProduct = transform.up.x * rb.linearVelocity.x + transform.up.y * rb.linearVelocity.y;
+                        if (dotProduct > 0 || Input.GetAxisRaw("Vertical") > 0)
+                        {
+                            rb.AddForce(transform.up * forwardVelocity);
+                        }
+                        rb.MoveRotation(rb.rotation + -(angularVelocity) * Time.fixedDeltaTime);
+                        maxVelocity = 4f;
+                    }
+                }
+                else
+                {
+                    deadZoneTimer += Time.deltaTime;
+                    maxVelocity = 0.8f;
+                }
+
+                if (isFinished)
+                {
+                    timet += speed * Time.unscaledDeltaTime;
+                    followCam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(followCam.GetComponent<Camera>().orthographicSize, 1f, timet);
+                }
+
+
+                if (deadZoneTimer >= 5)
+                {
+                    isAlive = false;
+                }
             }
         }
         else
@@ -136,7 +154,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (col.gameObject.tag == "Finish")
         {
-            isAlive = false;
+            Debug.Log("finish pls");
+            isFinished = true;
+            followCam.ChangeTarget(col.transform, 5);
+            
         }
     }
 
