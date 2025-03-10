@@ -35,11 +35,11 @@ public class Tutorial : MonoBehaviour
         {
             t += speed * Time.unscaledDeltaTime;
             camScript.GetComponent<Camera>().orthographicSize = Mathf.Lerp(camScript.GetComponent<Camera>().orthographicSize, 3f, t);
-
+        
             if (t > 1.0f)
             {
                 t = 0.0f;
-            }
+    }
         }
     }
 
